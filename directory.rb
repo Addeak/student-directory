@@ -1,3 +1,5 @@
+total = 11
+
 puts "The students of Villains Acaademy"
 puts "--------------"
 puts "Dr. Hannibal Lecter"
@@ -11,3 +13,5 @@ puts "Freddy Krueger"
 puts "The Joker"
 puts "Joffrey Baratheon"
 puts "Norman Bates"
+
+puts "Overall, we have #{total} great students."
