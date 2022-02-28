@@ -1,12 +1,18 @@
 def input_students
   students = []
 
-  puts "Please enter the names of the new students."
+  puts "Please enter the name of the new student."
   puts "To finish, just hit return twice."
 
   name = gets.chomp
   while !name.empty? do
-    students << {name: name, cohort: :november}
+    puts "Is this student part of the November or Ferbruary cohort?"
+    cohort = gets.chomp
+    while cohort.downcase != "november" && cohort.downcase != "february" do
+      puts "Please type 'November' or 'February'."
+      cohort = gets.chomp
+    end
+    students << {name: name, cohort: cohort.capitalize.to_sym}
     puts "Now we have #{students.count} students."
     name = gets.chomp
   end
