@@ -53,6 +53,10 @@ def print_footer(students)
 end
 
 students = input_students
-print_header
-print(students)
-print_footer(students)
+while students.count == 0 do
+  puts "The list is empty. Please, enter students name to populate the list."
+  students = input_students
+end
+  print_header
+  print(students)
+  print_footer(students)
