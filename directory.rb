@@ -6,12 +6,7 @@ def input_students
 
   name = gets.chomp
   while !name.empty? do
-    puts "Is this student part of the November or Ferbruary cohort?"
-    cohort = gets.chomp
-    while cohort.downcase != "november" && cohort.downcase != "february" do
-      puts "Please type 'November' or 'February'."
-      cohort = gets.chomp
-    end
+    cohort = input_cohort
     students << {name: name, cohort: cohort.capitalize.to_sym}
     if students.count == 1
       puts "Now we have 1 student."
@@ -23,14 +18,33 @@ def input_students
   students
 end
 
+def input_cohort
+  puts "November or February cohort?"
+  cohort = gets.chomp
+  while cohort.downcase != "november" && cohort.downcase != "february" do
+    puts "Please type 'November' or 'February'."
+    cohort = gets.chomp
+  end
+  cohort
+end
+
 def print_header
   puts "The students of Villains Acaademy"
   puts "--------------"
 end
 
 def print(students)
-  students.each_with_index do |student, i|
+  feb = students.select { |student| student.has_value?(:February) }
+  nov = students.select { |student| student.has_value?(:November) }
+  cohort = input_cohort
+  if cohort == "February"
+    feb.each_with_index do |student, i|
     puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  else
+    nov.each_with_index do |student, i|
+      puts "#{i + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 
