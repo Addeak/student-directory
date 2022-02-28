@@ -42,6 +42,10 @@ def show_students
     print_footer(@students)
 end
 
+def populate_list(name, cohort)
+  @students << {name: name, cohort: cohort.capitalize.to_sym}
+end
+
 def input_students
   puts "Please enter the name of the new student."
   puts "To finish, just hit return twice."
@@ -49,7 +53,7 @@ def input_students
   name = STDIN.gets.chomp
   while !name.empty? do
     cohort = input_cohort
-    @students << {name: name, cohort: cohort.capitalize.to_sym}
+    populate_list(name, cohort)
     if @students.count == 1
       puts "Now we have 1 student."
     else
@@ -107,7 +111,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    populate_list(name, cohort)
   end
   file.close
 end
