@@ -13,7 +13,11 @@ def input_students
       cohort = gets.chomp
     end
     students << {name: name, cohort: cohort.capitalize.to_sym}
-    puts "Now we have #{students.count} students."
+    if students.count == 1
+      puts "Now we have 1 student."
+    else
+      puts "Now we have #{students.count} students."
+    end
     name = gets.chomp
   end
   students
