@@ -1,3 +1,32 @@
+def interactive_menu
+  students = []
+
+  loop do
+    puts "1. Input the students."
+    puts "2. Show the students."
+    puts "9. Exit"
+
+    selection = gets.chomp
+
+    case selection
+    when "1"
+      students = input_students
+    when "2"
+      while students.count == 0 do
+        puts "The list is empty. Please, enter students name to populate the list."
+        students = input_students
+      end
+        print_header
+        print(students)
+        print_footer(students)
+    when "9"
+      exit
+    else
+      puts "Please select a number."
+    end
+  end
+end
+
 def input_students
   students = []
 
@@ -52,11 +81,4 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students."
 end
 
-students = input_students
-while students.count == 0 do
-  puts "The list is empty. Please, enter students name to populate the list."
-  students = input_students
-end
-  print_header
-  print(students)
-  print_footer(students)
+interactive_menu
