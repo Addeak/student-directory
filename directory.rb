@@ -7,6 +7,15 @@ def interactive_menu
   end
 end
 
+def get_filename
+  puts "Enter file name or leave blank to use default."
+  filename = STDIN.gets.chomp
+  if filename == ""
+    return "students.csv"
+  end
+  filename
+end
+
 def process(selection)
   case selection
   when "1"
@@ -14,9 +23,9 @@ def process(selection)
   when "2"
     show_students
   when "3"
-    save_students
+    save_students(get_filename)
   when "4"
-    load_students
+    load_students(get_filename)
   when "9"
     exit
   else
@@ -27,8 +36,8 @@ end
 def print_menu
   puts "1. Input the students."
   puts "2. Show the students."
-  puts "3. Save student list to 'students.csv'."
-  puts "4. Load student list from 'students.csv'."
+  puts "3. Save student list."
+  puts "4. Load student list."
   puts "9. Exit"
 end
 
@@ -97,8 +106,8 @@ def print_footer(students)
   puts "Overall, we have #{@students.count} great students."
 end
 
-def save_students
-  file = File.open("students.csv", "w")
+def save_students(filename = "students.csv")
+  file = File.open(filename, "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
